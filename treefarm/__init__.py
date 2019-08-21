@@ -1,5 +1,5 @@
 """
-tree_farm imports
+treefarm imports
 
 
 
@@ -15,13 +15,13 @@ tree_farm imports
 
 __version__ = '1.0.dev1'
 
-from ytree.tree_farm.tree_farm import \
+from treefarm.treefarm import \
     TreeFarm
-from ytree.tree_farm.ancestry_checker import \
+from treefarm.ancestry_checker import \
     add_ancestry_checker
-from ytree.tree_farm.ancestry_filter import \
+from treefarm.ancestry_filter import \
     add_ancestry_filter
-from ytree.tree_farm.ancestry_short import \
+from treefarm.ancestry_short import \
     add_ancestry_short
-from ytree.tree_farm.halo_selector import \
+from treefarm.halo_selector import \
     add_halo_selector

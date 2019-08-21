@@ -19,15 +19,13 @@ import yt
 
 from ytree.arbor.frontends.tree_farm import \
     TreeFarmArbor
-from ytree.tree_farm import \
+from treefarm import \
     TreeFarm
-from ytree.utilities.testing import \
+from treefarm.utilities.testing import \
     requires_file, \
     save_and_compare, \
     test_data_dir, \
     TempDirTest
-
-import ytree
 
 def virial_radius(field, data):
     rho_c = data.ds.cosmology.critical_density(
@@ -40,7 +38,7 @@ def setup_ds(ds):
         if ds.particle_type_counts[ftype] == 0: continue
         ds.add_field((ftype, "virial_radius"),
                      function=virial_radius,
-                     units="cm", particle_type=True)
+                     units="cm", sampling_type='particle')
 
 
 FOF20 = os.path.join(

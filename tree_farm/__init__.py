@@ -13,6 +13,8 @@ tree_farm imports
 # The full license is in the file COPYING.txt, distributed with this software.
 #-----------------------------------------------------------------------------
 
+__version__ = '1.0.dev1'
+
 from ytree.tree_farm.tree_farm import \
     TreeFarm
 from ytree.tree_farm.ancestry_checker import \

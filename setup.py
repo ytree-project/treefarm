@@ -14,7 +14,7 @@ def get_version(filename):
         "Could not get version from %s." % filename)
 
 
-VERSION = get_version("ytree/__init__.py")
+VERSION = get_version("treefarm/__init__.py")
 
 with open('README.md') as f:
     long_description = f.read()
@@ -23,23 +23,23 @@ dev_requirements = [
     'coveralls', 'flake8', 'pytest>=3.6', 'pytest-cov', 'twine', 'wheel',
     'sphinx', 'sphinx_rtd_theme']
 
-setup(name="ytree",
+setup(name="treefarm",
       version=VERSION,
-      description="An extension of yt for working with merger-tree data.",
+      description="An extension of yt for creating merger-trees.",
       long_description=long_description,
       long_description_content_type='text/markdown',
       author="Britton Smith",
       author_email="brittonsmith@gmail.com",
       license="BSD 3-Clause",
       keywords=["simulation", "merger-tree", "astronomy", "astrophysics"],
-      url="https://github.com/brittonsmith/ytree",
+      url="https://github.com/ytree-project/treefarm",
       project_urls={
-          'Homepage': 'https://github.com/brittonsmith/ytree',
-          'Documentation': 'https://ytree.readthedocs.io/',
-          'Source': 'https://github.com/brittonsmith/ytree',
-          'Tracker': 'https://github.com/brittonsmith/ytree/issues'
+          'Homepage': 'https://github.com/ytree-project/treefarm',
+          'Documentation': 'https://treefarm.readthedocs.io/',
+          'Source': 'https://github.com/ytree-project/treefarm',
+          'Tracker': 'https://github.com/ytree-project/treefarm/issues'
       },
-      packages=["ytree"],
+      packages=["treefarm"],
       include_package_data=True,
       classifiers=[
           "Development Status :: 4 - Beta",
@@ -60,6 +60,7 @@ setup(name="ytree",
           'h5py',
           'numpy',
           'yt>=3.4',
+          'ytree'
       ],
       extras_require={
           'dev': dev_requirements,

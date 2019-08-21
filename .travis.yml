@@ -56,10 +56,6 @@ script: pytest --cov=treefarm tests
 jobs:
   include:
     - stage: tests
-      name: "tests with Python 2.7"
-      python: 2.7
-
-    - stage: tests
       name: "tests with Python 3.5"
       python: 3.5
 

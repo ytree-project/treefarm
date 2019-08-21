@@ -42,7 +42,7 @@ from treefarm.utilities.io import \
     yt_load
 from treefarm.utilities.logger import \
     set_parallel_logger, \
-    ytreeLogger as mylog
+    treefarmLogger as mylog
 
 class TreeFarm(object):
     r"""

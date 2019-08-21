@@ -25,19 +25,19 @@ import sys
 
 ufstring = "%(name)-3s: [%(levelname)-9s] %(asctime)s %(message)s"
 
-ytreeLogger = logging.getLogger("ytree")
-ytree_sh = logging.StreamHandler(stream=sys.stderr)
+treefarmLogger = logging.getLogger("treefarm")
+treefarm_sh = logging.StreamHandler(stream=sys.stderr)
 formatter = logging.Formatter(ufstring)
-ytree_sh.setFormatter(formatter)
-ytreeLogger.addHandler(ytree_sh)
-ytreeLogger.setLevel(20)
-ytreeLogger.propagate = False
+treefarm_sh.setFormatter(formatter)
+treefarmLogger.addHandler(treefarm_sh)
+treefarmLogger.setLevel(20)
+treefarmLogger.propagate = False
 
 def set_parallel_logger(comm):
     if comm.size == 1: return
     f = logging.Formatter("P%03i %s" % (comm.rank, ufstring))
-    if len(ytreeLogger.handlers) > 0:
-        ytreeLogger.handlers[0].setFormatter(f)
+    if len(treefarmLogger.handlers) > 0:
+        treefarmLogger.handlers[0].setFormatter(f)
 
 class fake_pbar(object):
     def __init__(self, *args):

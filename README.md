@@ -1,63 +1,40 @@
-# ytree
+# treefarm
 
-[![Build Status](https://travis-ci.org/brittonsmith/ytree.svg?branch=master)](https://travis-ci.org/brittonsmith/ytree)
-[![Coverage Status](https://coveralls.io/repos/github/brittonsmith/ytree/badge.svg)](https://coveralls.io/github/brittonsmith/ytree)
-[![Documentation Status](https://readthedocs.org/projects/ytree/badge/?version=latest)](http://ytree.readthedocs.io/en/latest/?badge=latest)
-[![PyPI version](https://badge.fury.io/py/ytree.svg)](https://badge.fury.io/py/ytree)
-[![DOI](https://zenodo.org/badge/98564214.svg)](https://zenodo.org/badge/latestdoi/98564214)
+[![Build Status](https://travis-ci.org/ytree-project/treefarm.svg?branch=master)](https://travis-ci.org/ytree-project/treefarm)
+[![Coverage Status](https://coveralls.io/repos/github/ytree-project/treefarm/badge.svg?branch=master)](https://coveralls.io/github/ytree-project/treefarm?branch=master)
+[![Documentation Status](https://readthedocs.org/projects/treefarm/badge/?version=latest)](https://treefarm.readthedocs.io/en/latest/?badge=latest)
 
-This is ytree, a [yt](https://github.com/yt-project/yt) extension for generating and working with
-merger-tree data.  ytree supports:
-
- * loading merger-tree data from the Amiga Halo Finder, Consistent-Trees, Rockstar, and LHaloTree formats
-
- * creating merger trees from Gadget's inline FOF/SUBFIND catalogs
-
- * fast, on-demand loading of trees and fields
-
- * symbolic units, derived fields, and alias fields
-
- * saving trees to a universal format
+This is treefarm, a [yt](https://github.com/yt-project/yt) extension for creating merger-trees.
+The treefarm package was originally a part of [ytree](https://treefarm.readthedocs.io/), but is now
+its own thing.
 
 ## Installation
 
-ytree can be installed with pip:
-
-```
-pip install ytree
-```
-
+Currently, treefarm can only be installed from source.
 To get the development version, clone this repository and install like this:
 
 ```
-git clone https://github.com/brittonsmith/ytree
+git clone https://github.com/ytree-project/treefarm/ytree
 cd ytree
 pip install -e .
 ```
 
-## Getting Started
-
-Below is a notebook that demonstrates how to use ytree with merger-tree data.  For
-more information, see the full [ytree documenation](https://ytree.readthedocs.io).
-
- * [Introduction](https://github.com/brittonsmith/ytree/blob/master/doc/source/notebooks/Intro_to_ytree.ipynb)
-
 ## Sample Data
 
-Sampled data for all merger-tree formats supported by ytree is available on the
+Sampled data for making some small merger-trees is available on the
 [yt Hub](https://girder.hub.yt/) in the
 [ytree data](https://girder.hub.yt/#collection/59835a1ee2a67400016a2cda) collection.
 
 ## Contributing
 
-ytree would be much better with your contribution!  As an extension of
+treefarm would be much better with your contribution!  As an extension of
 [the yt Project](https://yt-project.org/), we follow the yt
 [guidelines for contributing](https://github.com/yt-project/yt#contributing).
 
-## Citing ytree
+## Citing treefarm
 
 
-If you use ytree in your work, please cite the following:
+If you use treefarm in your work, please cite the following:
 
 ```
 Britton Smith, & Meagan Lang. (2018, February 16). ytree: merger-tree toolkit. Zenodo.
@@ -79,10 +56,10 @@ For BibTeX users:
 ```
 
 If possible, please also add a footnote pointing to
-https://ytree.readthedocs.io.
+https://treefarm.readthedocs.io.
 
 ## Resources
 
- * The latest documentation can be found at https://ytree.readthedocs.io
+ * The latest documentation can be found at https://treefarm.readthedocs.io
 
- * ytree is an extension of [the yt Project](https://yt-project.org/). The [yt-project community resources](https://github.com/yt-project/yt#resources) can be used for ytree-related communication.
+ * treefarm is an extension of [the yt Project](https://yt-project.org/). The [yt-project community resources](https://github.com/yt-project/yt#resources) can be used for treefarm-related communication.

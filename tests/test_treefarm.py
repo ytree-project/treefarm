@@ -23,9 +23,10 @@ from ytree.arbor.frontends.tree_farm import \
 from treefarm import \
     TreeFarm
 from treefarm.utilities.testing import \
+    test_data_dir
+from ytree.utilities.testing import \
     requires_file, \
     save_and_compare, \
-    test_data_dir, \
     TempDirTest
 
 def virial_radius(field, data):

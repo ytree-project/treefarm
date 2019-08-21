@@ -16,6 +16,7 @@ TreeFarm tests
 import numpy as np
 import os
 import yt
+import ytree
 
 from ytree.arbor.frontends.tree_farm import \
     TreeFarmArbor

@@ -29,18 +29,18 @@ from yt.utilities.parallel_tools.parallel_analysis_interface import \
     _get_comm, \
     parallel_objects
 
-from ytree.tree_farm.ancestry_checker import \
+from treefarm.ancestry_checker import \
     ancestry_checker_registry
-from ytree.tree_farm.ancestry_filter import \
+from treefarm.ancestry_filter import \
     ancestry_filter_registry
-from ytree.tree_farm.ancestry_short import \
+from treefarm.ancestry_short import \
     ancestry_short_registry
-from ytree.tree_farm.halo_selector import \
+from treefarm.halo_selector import \
     selector_registry, \
     clear_id_cache
-from ytree.utilities.io import \
+from treefarm.utilities.io import \
     yt_load
-from ytree.utilities.logger import \
+from treefarm.utilities.logger import \
     set_parallel_logger, \
     ytreeLogger as mylog
 
@@ -74,7 +74,7 @@ class TreeFarm(object):
     >>> import nummpy as np
     >>> import yt
     >>> import ytree
-    >>> from ytree.tree_farm import TreeFarm
+    >>> from treefarm import TreeFarm
     >>> ts = yt.DatasetSeries("data/groups_*/fof_subhalo_tab*.0.hdf5")
     >>> my_tree = TreeFarm(ts)
     >>> my_tree.trace_descendents("Group", filename="all_halos/")
@@ -88,7 +88,7 @@ class TreeFarm(object):
     >>> import nummpy as np
     >>> import yt
     >>> import ytree
-    >>> from ytree.tree_farm import TreeFarm
+    >>> from treefarm import TreeFarm
     >>> ts = yt.DatasetSeries("data/groups_*/fof_subhalo_tab*.0.hdf5")
     >>> ds = yt[-1]
     >>> i = np.argmax(ds.r["Group", "particle_mass"].d)

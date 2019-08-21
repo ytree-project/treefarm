@@ -4,7 +4,7 @@ __pycache__/
 .coverage
 .pytest_cache
 flake8.out
-ytree.egg-info
+treefarm.egg-info
 *~
 *.pyc
 doc/build

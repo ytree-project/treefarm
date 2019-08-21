@@ -17,9 +17,9 @@ import configparser
 import os
 
 CONFIG_DIR = os.environ.get("XDG_CONFIG_HOME",
-    os.path.join(os.path.expanduser("~"), ".config", "ytree"))
+    os.path.join(os.path.expanduser("~"), ".config", "treefarm"))
 
-ytreecfg = configparser.ConfigParser()
-ytreecfg.read(os.path.join(CONFIG_DIR, "ytreerc"))
-if not ytreecfg.has_section("ytree"):
-    ytreecfg.add_section("ytree")
+treefarmcfg = configparser.ConfigParser()
+treefarmcfg.read(os.path.join(CONFIG_DIR, "treefarmrc"))
+if not treefarmcfg.has_section("treefarm"):
+    treefarmcfg.add_section("treefarm")

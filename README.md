@@ -14,8 +14,8 @@ Currently, treefarm can only be installed from source.
 To get the development version, clone this repository and install like this:
 
 ```
-git clone https://github.com/ytree-project/treefarm/ytree
-cd ytree
+git clone https://github.com/ytree-project/treefarm
+cd treefarm
 pip install -e .
 ```
 
@@ -34,7 +34,7 @@ treefarm would be much better with your contribution!  As an extension of
 ## Citing treefarm
 
 
-If you use treefarm in your work, please cite the following:
+If you use treefarm in your work, please cite the ytree package for now:
 
 ```
 Britton Smith, & Meagan Lang. (2018, February 16). ytree: merger-tree toolkit. Zenodo.

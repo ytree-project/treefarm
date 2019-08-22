@@ -33,8 +33,13 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.napoleon',
+    'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
 ]
+
+intersphinx_mapping = \
+  {'yt': ('https://yt-project.org/docs/dev/', None),
+   'ytree': ('https://ytree.readthedocs.io/en/latest/', None)}
 
 autosummary_generate = glob.glob("api_reference.rst")
 

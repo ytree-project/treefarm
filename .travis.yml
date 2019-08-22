@@ -48,7 +48,7 @@ before_script:
   - |
     # download test data
     if [ ! -d $TREEFARM_DATA/rockstar ]; then
-        girder-cli --api-url https://girder.hub.yt/api/v1 download 59835a1ee2a67400016a2cda $YTREE_DATA
+        girder-cli --api-url https://girder.hub.yt/api/v1 download 59835a1ee2a67400016a2cda $TREEFARM_DATA
     fi
 
 script: pytest --cov=treefarm tests

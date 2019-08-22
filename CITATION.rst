@@ -1,7 +1,8 @@
-Citing ytree
-============
+Citing treefarm
+===============
 
-If you use ytree in your work, please cite the following:
+If you use ``treefarm`` in your work, for now please cite the ``ytree``
+package:
 
 Britton Smith, & Meagan Lang. (2018, February 16). 
 ytree: merger-tree toolkit. Zenodo.
@@ -22,4 +23,4 @@ For BibTeX users:
   }
 
 If possible, please also add a footnote pointing to
-http://ytree.readthedocs.io.
+https://treefarm.readthedocs.io.

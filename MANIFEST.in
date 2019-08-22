@@ -1,5 +1,5 @@
 include README* CREDITS COPYING.txt CHANGELOG CONTRIBUTING.rst CITATION.rst
-recursive-include ytree *.py *.txt
+recursive-include treefarm *.py *.txt
 recursive-include doc *.rst *.py *.png
 include doc/README
 include doc/Makefile

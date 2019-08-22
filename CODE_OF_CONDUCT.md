@@ -1,4 +1,4 @@
-# ytree Community Code of Conduct
+# treefarm Community Code of Conduct
 
 The community of participants in open source Scientific projects is
 made up of members from around the globe with a diverse set of skills,

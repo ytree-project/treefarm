@@ -3,11 +3,11 @@
 Community Code of Conduct
 =========================
 
-ytree is a project by members of the `yt community
-<http://yt-project.org/community.html>`_.  As such, we stand by the
+treefarm is a project by members of the `yt community
+<https://yt-project.org/community.html>`_.  As such, we stand by the
 `yt Community Code of Conduct
-<http://yt-project.org/community.html#codeofconduct>`_.
+<https://yt-project.org/community.html#codeofconduct>`_.
 
-Below is the ytree version of this code.
+Below is the treefarm version of this code.
 
 .. include:: ../../CODE_OF_CONDUCT.md

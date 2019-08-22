@@ -1,9 +1,9 @@
 .. _treefarm:
 
-Making Merger-trees from Gadget FoF/Subfind
-===========================================
+Making Merger-trees
+===================
 
-The ytree ``TreeFarm`` can compute merger-trees either for all halos,
+``treefarm`` can compute merger-trees either for all halos,
 starting at the beginning of the simulation, or for specific halos,
 starting at the final output and moving backward.  These two
 use-cases are covered separately.  Halo catalogs must be in the form
@@ -13,7 +13,7 @@ finder.
 Computing a Full Merger-tree
 ----------------------------
 
-``TreeFarm`` accepts a ``yt`` time-series object over which the
+``treefarm`` accepts a ``yt`` time-series object over which the
 merger-tree will be computed.
 
 .. code-block:: python
@@ -73,7 +73,7 @@ Running in Parallel
 ytree uses the parallel capabilities of ``yt`` to divide up the
 halo ancestor/descendent search over multiple processors.
 In order to do this, ``yt`` must be set up to run in parallel.
-See `here <http://yt-project.org/doc/analyzing/parallel_computation.html#setting-up-parallel-yt>`_
+See `here <https://yt-project.org/doc/analyzing/parallel_computation.html#setting-up-parallel-yt>`_
 for instructions.  Once this is done, a call to
 ``yt.enable_parallelism()`` must be added to your script.
 
@@ -99,11 +99,11 @@ Optimizing Halo Candidate Selection
 Halo ancestors and descendents are typically found by comparing
 particle IDs between two halos.  The method of selecting which
 halos should be compared can greatly affect performance.  By
-default, ``TreeFarm`` will compare a halo against all halos
+default, ``treefarm`` will compare a halo against all halos
 in the next dataset.  This is both the most robust and slowest
 method of matching ancestors and descendents.  A smarter
 method is to select candidate matches from only a region
-around the target halo.  For example, ``TreeFarm`` can be
+around the target halo.  For example, ``treefarm`` can be
 configured to select halos from a sphere centered on the
 current halo.
 
@@ -131,14 +131,14 @@ Searching for Fewer Ancestors
 When computing a merger-tree for specific halos
 (:ref:`ancestor_search`), you only be interested in the most
 massive or the few most massive progenitors.  If this is the
-case, ``TreeFarm`` can be configured to end the ancestor
+case, ``treefarm`` can be configured to end the ancestor
 search when these have been found, rather than searching for
 all possible progenitors.
 
 The ``set_ancestry_filter`` function places a filter on which
 ancestors of any given halo will be returned and followed in
 successive rounds of the merger-tree process.  The
-"most_massive" filter instructs the ``TreeFarm`` to only
+"most_massive" filter instructs the ``treefarm`` to only
 keep the most massive ancestor.  This will greatly reduce
 the number of halos included in the merger-tree and,
 therefore, speed up the calculation considerably.  For an

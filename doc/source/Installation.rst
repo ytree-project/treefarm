@@ -3,30 +3,25 @@
 Installation
 ============
 
-ytree's main dependency is `yt <http://yt-project.org/>`_.  Once you
-have installed ``yt`` following the instructions `here
-<http://yt-project.org/#getyt>`__, ytree can be installed using pip.
+``treefarm``'s main dependencies are `yt <https://yt-project.org/>`_ and
+`ytree <https://ytree.readthedocs.io>`_. If you manage packages with
+something like `miniconda <https://docs.conda.io/en/latest/miniconda.html>`__,
+then you can use ``pip`` to install ``treefarm`` after downloading the source.
+In the future, ``treefarm`` will be installable directly from ``pip``. For now,
+do the following:
 
 .. code-block:: bash
 
-    $ pip install ytree
-
-If you'd like to install the development version, the repository can
-be found at `<https://github.com/brittonsmith/ytree>`__.  This can be
-installed by doing:
-
-.. code-block:: bash
-
-   $ git clone https://github.com/brittonsmith/ytree
-   $ cd ytree
+   $ git clone https://github.com/ytree-project/treefarm
+   $ cd treefarm
    $ pip install -e .
 
 What version do I have?
 =======================
 
-To see what version of ytree you are using, do the following:
+To see what version of ``treefarm`` you are using, do the following:
 
 .. code-block:: python
 
-   import ytree
-   print (ytree.__version__)
+   import treefarm
+   print (treefarm.__version__)

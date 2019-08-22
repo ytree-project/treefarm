@@ -1,11 +1,11 @@
-=======================
- ytree licensing terms
-=======================
+==========================
+ treefarm licensing terms
+==========================
 
-ytree is licensed under the terms of the Modified BSD License
+treefarm is licensed under the terms of the Modified BSD License
 (also known as New or Revised BSD), as follows:
 
-Copyright (c) 2015-, ytree development team
+Copyright (c) 2015-, treefarm development team
 
 All rights reserved.
 

@@ -3,8 +3,8 @@
 Sample Data
 ===========
 
-Sample datasets for every supported data format are available for download
-from the `yt Hub <https://girder.hub.yt/>`__ in the
+Sample datasets for generating some small merger-trees are available
+for download from the `yt Hub <https://girder.hub.yt/>`__ in the
 `ytree data <https://girder.hub.yt/#collection/59835a1ee2a67400016a2cda>`__
 collection.  The entire collection (about 358 MB) can be downloaded
 via the yt Hub's web interface by clicking on "Actions" drop-down menu on
@@ -15,3 +15,6 @@ through the girder-client interface:
 
    $ pip install girder-client
    $ girder-cli --api-url https://girder.hub.yt/api/v1 download 59835a1ee2a67400016a2cda ytree_data
+
+Within that collection, the ``fof_subfind`` directory contains FoF/Subfind
+catalogs generated from a small Gadget simulation.

@@ -19,7 +19,7 @@ merger-tree will be computed.
 .. code-block:: python
 
    import yt
-   from ytree.tree_farm import TreeFarm
+   from treefarm import TreeFarm
 
    ts = yt.DatasetSeries("data/groups_*/*.0.hdf5")
    my_tree = TreeFarm(ts)
@@ -48,7 +48,7 @@ most massive halo.
 .. code-block:: python
 
    import yt
-   from ytree.tree_farm import TreeFarm
+   from treefarm import TreeFarm
 
    ds = yt.load("fof_subfind/groups_025/fof_subhalo_tab_025.0.hdf5")
    i_max = np.argmax(ds.r["Group", "particle_mass"])
@@ -81,7 +81,7 @@ for instructions.  Once this is done, a call to
 
    import yt
    yt.enable_parallelism()
-   from ytree.tree_farm import TreeFarm
+   from treefarm import TreeFarm
 
    ts = yt.DatasetSeries("data/groups_*/*.0.hdf5")
    my_tree = TreeFarm(ts)

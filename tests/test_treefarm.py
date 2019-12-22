@@ -18,7 +18,7 @@ import os
 import yt
 import ytree
 
-from ytree.arbor.frontends.tree_farm import \
+from ytree.frontends.treefarm import \
     TreeFarmArbor
 from treefarm import \
     TreeFarm
@@ -53,7 +53,7 @@ FOF40 = os.path.join(
 
 class TreeFarmTest(TempDirTest):
     @requires_file(FOF20)
-    def test_tree_farm_descendents(self):
+    def test_treefarm_descendents(self):
         ts = yt.DatasetSeries(
             os.path.join(test_data_dir, "fof_subfind/groups_02*/*.0.hdf5"))
         my_tree = TreeFarm(ts, setup_function=setup_ds)
@@ -67,7 +67,7 @@ class TreeFarmTest(TempDirTest):
         save_and_compare(a)
 
     @requires_file(FOF40)
-    def test_tree_farm_ancestors(self):
+    def test_treefarm_ancestors(self):
         ts = yt.DatasetSeries(
             os.path.join(test_data_dir, "fof_subfind/groups_04*/*.0.hdf5"))
 

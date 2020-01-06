@@ -1,0 +1,13 @@
+comment: true
+
+coverage:
+  status:
+    project:
+      default:
+        threshold: 1%
+    patch:
+      default:
+        threshold: 100%
+
+codecov:
+  token: 1dae764d-7c31-4c05-ad8d-8eb3c1f3cd71

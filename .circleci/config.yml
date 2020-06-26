@@ -4,9 +4,11 @@ commands:
   set-env:
     description: "Set environment variables."
     steps:
-      - run: |
-          echo 'export YT_DIR=$HOME/yt-git' >> $BASH_ENV
-          echo 'export TREEFARM_DATA=$HOME/treefarm_test' >> $BASH_ENV
+      - run:
+          name: "Set environment variables."
+          command: |
+            echo 'export YT_DIR=$HOME/yt-git' >> $BASH_ENV
+            echo 'export TREEFARM_DATA=$HOME/treefarm_test' >> $BASH_ENV
 
   install:
     description: "Install treefarm and dependencies."
@@ -15,48 +17,54 @@ commands:
         type: integer
         default: 0
     steps:
-      - run: |
-          if [ ! -d $HOME/venv ]; then
-              python3 -m venv $HOME/venv
-          fi
-          source $BASH_ENV
-          source $HOME/venv/bin/activate
-          pip install --upgrade pip
-          pip install --upgrade wheel
-          pip install --upgrade setuptools
-          pip install Cython numpy
-          pip install girder-client
-          if [ << parameters.ytdev >> == 1 ]; then
-              if [ ! -f $YT_DIR/README.md ]; then
-                  git clone --branch=master https://github.com/yt-project/yt $YT_DIR
-              fi
-              pushd $YT_DIR
-              git pull origin master
-              git checkout master
-              pip install -e .
-              popd
-          fi
-          pip install -e .[dev]
+      - run:
+          name: "Install treefarm and dependencies."
+          command: |
+            if [ ! -d $HOME/venv ]; then
+                python3 -m venv $HOME/venv
+            fi
+            source $BASH_ENV
+            source $HOME/venv/bin/activate
+            pip install --upgrade pip
+            pip install --upgrade wheel
+            pip install --upgrade setuptools
+            pip install Cython numpy
+            pip install girder-client
+            if [ << parameters.ytdev >> == 1 ]; then
+                if [ ! -f $YT_DIR/README.md ]; then
+                    git clone --branch=master https://github.com/yt-project/yt $YT_DIR
+                fi
+                pushd $YT_DIR
+                git pull origin master
+                git checkout master
+                pip install -e .
+                popd
+            fi
+            pip install -e .[dev]
 
   configure-treefarm:
     description: "Configure treefarm."
     steps:
-      - run: |
-          # configure treefarm
-          mkdir -p $HOME/.config/treefarm
-          echo "[treefarm]" > $HOME/.config/treefarm/treefarmrc
-          echo "test_data_dir = $TREEFARM_DATA" >> $HOME/.config/treefarm/treefarmrc
+      - run:
+          name: "Configure treefarm."
+          command: |
+            # configure treefarm
+            mkdir -p $HOME/.config/treefarm
+            echo "[treefarm]" > $HOME/.config/treefarm/treefarmrc
+            echo "test_data_dir = $TREEFARM_DATA" >> $HOME/.config/treefarm/treefarmrc
 
   download-test-data:
     description: "Download test data."
     steps:
-      - run: |
-          # download test data
-          if [ ! -d $TREEFARM_DATA/rockstar ]; then
-              source $BASH_ENV
-              source $HOME/venv/bin/activate
-              girder-cli --api-url https://girder.hub.yt/api/v1 download 59835a1ee2a67400016a2cda $TREEFARM_DATA
-          fi
+      - run:
+          name: "Download test data."
+          command: |
+            # download test data
+            if [ ! -d $TREEFARM_DATA/rockstar ]; then
+                source $BASH_ENV
+                source $HOME/venv/bin/activate
+                girder-cli --api-url https://girder.hub.yt/api/v1 download 59835a1ee2a67400016a2cda $TREEFARM_DATA
+            fi
 
   run-tests:
     description: "Build treefarm and run tests."
@@ -66,23 +74,27 @@ commands:
         default: 0
 
     steps:
-      - run: |
-          source $BASH_ENV
-          source $HOME/venv/bin/activate
-          pytest --cov=treefarm tests
-          if [ << parameters.coverage >> == 1 ]; then
-              # code coverage report
-              codecov
-          fi
+      - run:
+          name: "Build treefarm and run tests."
+          command: |
+            source $BASH_ENV
+            source $HOME/venv/bin/activate
+            pytest --cov=treefarm tests
+            if [ << parameters.coverage >> == 1 ]; then
+                # code coverage report
+                codecov
+            fi
 
   build-docs:
     description: "Test the docs build."
     steps:
-      - run: |
-          source $BASH_ENV
-          source $HOME/venv/bin/activate
-          cd doc/source
-          python -m sphinx -M html "." "_build" -W
+      - run:
+          name: "Test the docs build."
+          command: |
+            source $BASH_ENV
+            source $HOME/venv/bin/activate
+            cd doc/source
+            python -m sphinx -M html "." "_build" -W
 
 executors:
   python:

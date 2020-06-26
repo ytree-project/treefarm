@@ -8,6 +8,7 @@ commands:
           name: "Set environment variables."
           command: |
             echo 'export YT_DIR=$HOME/yt-git' >> $BASH_ENV
+            echo 'export YTREE_DIR=$HOME/ytree' >> $BASH_ENV
             echo 'export TREEFARM_DATA=$HOME/treefarm_test' >> $BASH_ENV
 
   install:
@@ -41,6 +42,10 @@ commands:
                 pip install -e .
                 popd
             fi
+            git clone https://github.com/ytree-project/ytree $YTREE_DIR
+            pushd $YTREE_DIR
+            pip install -e .
+            popd
             pip install -e .[dev]
 
   configure-treefarm:
@@ -75,7 +80,7 @@ commands:
           command: |
             source $BASH_ENV
             source $HOME/venv/bin/activate
-            flake8 ytree
+            flake8 treefarm
 
   run-tests:
     description: "Build treefarm and run tests."

@@ -1,4 +1,4 @@
-from yt.convenience import \
+from yt.loaders import \
     load as _yt_load
 from yt.utilities.logger import \
     ytLogger

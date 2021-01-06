@@ -16,7 +16,7 @@ HaloSelector functions
 import numpy as np
 
 from yt.funcs import \
-    iterable
+    is_sequence
 from yt.units.yt_array import \
     YTQuantity
 from yt.utilities.operator_registry import \
@@ -106,7 +106,7 @@ def sphere_selector(hc, ds2, radius_field, factor=1,
     if min_radius is not None:
         if isinstance(min_radius, YTQuantity):
             pass
-        elif iterable(min_radius) and len(min_radius) == 2:
+        elif is_sequence(min_radius) and len(min_radius) == 2:
             min_radius = ds2.quan(min_radius[0], min_radius[1])
         else:
             raise RuntimeError(

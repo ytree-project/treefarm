@@ -22,7 +22,7 @@ from yt.funcs import \
     ensure_dir, \
     get_pbar, \
     get_output_filename, \
-    iterable
+    is_sequence
 from yt.units.yt_array import \
     YTArray
 from yt.utilities.parallel_tools.parallel_analysis_interface import \
@@ -285,7 +285,7 @@ class TreeFarm(object):
 
             if i == 0:
                 target_ids = root_ids
-                if not iterable(target_ids):
+                if not is_sequence(target_ids):
                     target_ids = np.array([target_ids])
                 if isinstance(target_ids, YTArray):
                     target_ids = target_ids.d

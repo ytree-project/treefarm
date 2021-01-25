@@ -1,7 +1,7 @@
 # treefarm
 
-[![CircleCI](https://circleci.com/gh/ytree-project/treefarm/tree/master.svg?style=svg)](https://circleci.com/gh/ytree-project/treefarm/tree/master)
-[![codecov](https://codecov.io/gh/ytree-project/treefarm/branch/master/graph/badge.svg)](https://codecov.io/gh/ytree-project/treefarm)
+[![CircleCI](https://circleci.com/gh/ytree-project/treefarm/tree/main.svg?style=svg)](https://circleci.com/gh/ytree-project/treefarm/tree/main)
+[![codecov](https://codecov.io/gh/ytree-project/treefarm/branch/main/graph/badge.svg)](https://codecov.io/gh/ytree-project/treefarm)
 [![Documentation Status](https://readthedocs.org/projects/treefarm/badge/?version=latest)](https://treefarm.readthedocs.io/en/latest/?badge=latest)
 
 This is treefarm, a [yt](https://github.com/yt-project/yt) extension for creating merger-trees.

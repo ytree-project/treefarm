@@ -9,7 +9,7 @@ Contributors
 ------------
 
 The `CREDITS file
-<https://github.com/ytree-project/treefarm/blob/master/CREDITS>`__
+<https://github.com/ytree-project/treefarm/blob/main/CREDITS>`__
 contains the most up-to-date list of everyone who has contributed to the
 ytree source code.
 

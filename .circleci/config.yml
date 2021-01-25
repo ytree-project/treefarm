@@ -34,11 +34,11 @@ commands:
             export MAX_BUILD_CORES=2
             if [ << parameters.ytdev >> == 1 ]; then
                 if [ ! -f $YT_DIR/README.md ]; then
-                    git clone --branch=master https://github.com/yt-project/yt $YT_DIR
+                    git clone --branch=main https://github.com/yt-project/yt $YT_DIR
                 fi
                 pushd $YT_DIR
-                git pull origin master
-                git checkout master
+                git pull origin main
+                git checkout main
                 pip install -e .
                 popd
             fi
@@ -145,7 +145,7 @@ jobs:
 
       - restore_cache:
           name: "Restore dependencies cache."
-          key: python-<< parameters.tag >>-<< parameters.ytdev >>-dependencies-v2
+          key: python-<< parameters.tag >>-<< parameters.ytdev >>-dependencies-v3
 
       - install:
           ytdev: << parameters.ytdev >>
@@ -153,7 +153,7 @@ jobs:
 
       - save_cache:
           name: "Save dependencies cache."
-          key: python-<< parameters.tag >>-<< parameters.ytdev >>-dependencies-v2
+          key: python-<< parameters.tag >>-<< parameters.ytdev >>-dependencies-v3
           paths:
             - ~/.cache/pip
             - ~/venv
@@ -193,7 +193,7 @@ jobs:
 
       - restore_cache:
           name: "Restore dependencies cache."
-          key: python-<< parameters.tag >>-1-dependencies-v1
+          key: python-<< parameters.tag >>-1-dependencies-v3
 
       - install:
           ytdev: 1
@@ -201,7 +201,7 @@ jobs:
 
       - save_cache:
           name: "Save dependencies cache."
-          key: python-<< parameters.tag >>-1-dependencies-v1
+          key: python-<< parameters.tag >>-1-dependencies-v3
           paths:
             - ~/.cache/pip
             - ~/venv
@@ -216,18 +216,18 @@ workflows:
      jobs:
        - tests:
            name: "Python 3.6 tests"
-           tag: "3.6.11"
+           tag: "3.6.12"
            ytdev: 1
 
        - tests:
-           name: "Python 3.8 tests with yt-dev"
-           tag: "3.8.5"
+           name: "Python 3.9 tests with yt-dev"
+           tag: "3.9.1"
            coverage: 1
            ytdev: 1
 
        - docs-test:
            name: "Test docs build"
-           tag: "3.8.5"
+           tag: "3.9.1"
 
    daily:
      triggers:
@@ -236,17 +236,17 @@ workflows:
            filters:
             branches:
               only:
-                - master
+                - main
      jobs:
        - tests:
-           name: "Python 3.8 tests with yt-dev"
-           tag: "3.8.5"
+           name: "Python 3.9 tests with yt-dev"
+           tag: "3.9.1"
            coverage: 0
            ytdev: 1
 
        - docs-test:
            name: "Test docs build"
-           tag: "3.8.5"
+           tag: "3.9.1"
 
    weekly:
      triggers:
@@ -255,9 +255,14 @@ workflows:
            filters:
             branches:
               only:
-                - master
+                - main
      jobs:
        - tests:
            name: "Python 3.7 tests"
-           tag: "3.7.8"
+           tag: "3.7.9"
+           ytdev: 1
+
+       - tests:
+           name: "Python 3.8 tests"
+           tag: "3.8.7"
            ytdev: 1

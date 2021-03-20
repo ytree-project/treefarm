@@ -265,9 +265,9 @@ class TreeFarm(object):
         for i, fn2 in enumerate(all_outputs[1:]):
             fn1 = all_outputs[i]
             target_filename = get_output_filename(
-                filename, "%s.%d" % (_get_tree_basename(fn1), 0), ".h5")
+                filename, f"{_get_tree_basename(fn1)}.{0}", ".h5")
             catalog_filename = get_output_filename(
-                filename, "%s.%d" % (_get_tree_basename(fn2), 0), ".h5")
+                filename, f"{_get_tree_basename(fn2)}.{0}", ".h5")
             if os.path.exists(catalog_filename):
                 continue
 
@@ -278,7 +278,7 @@ class TreeFarm(object):
             if self.comm.rank == 0:
                 _print_link_info(ds1, ds2)
 
-            if ds2.index.particle_count[halo_type] == 0:
+            if _get_total_halos(ds2, halo_type) == 0:
                 mylog.info("%s has no halos of type %s, ending." %
                            (ds2, halo_type))
                 break
@@ -359,9 +359,9 @@ class TreeFarm(object):
         for i, fn2 in enumerate(all_outputs[1:]):
             fn1 = all_outputs[i]
             target_filename = get_output_filename(
-                filename, "%s.%d" % (_get_tree_basename(fn1), 0), ".h5")
+                filename, f"{_get_tree_basename(fn1)}.{0}", ".h5")
             catalog_filename = get_output_filename(
-                filename, "%s.%d" % (_get_tree_basename(fn2), 0), ".h5")
+                filename, f"{_get_tree_basename(fn2)}.{0}", ".h5")
             if os.path.exists(target_filename):
                 continue
 
@@ -373,7 +373,7 @@ class TreeFarm(object):
                 _print_link_info(ds1, ds2)
 
             target_halos = []
-            if ds1.index.particle_count[halo_type] == 0:
+            if _get_total_halos(ds1, halo_type) == 0:
                 self._save_catalog(filename, ds1, target_halos, fields)
                 ds1 = ds2
                 continue
@@ -415,7 +415,7 @@ class TreeFarm(object):
         else:
             rank = self.comm.rank
         filename = get_output_filename(
-            filename, "%s.%d" % (_get_tree_basename(ds), rank), ".h5")
+            filename, f"{_get_tree_basename(ds)}.{rank}", ".h5")
 
         if fields is None:
             my_fields = []
@@ -426,8 +426,8 @@ class TreeFarm(object):
           ["particle_identifier",
            "descendent_identifier",
            "particle_mass"] + \
-           ["particle_position_%s" % ax for ax in "xyz"] + \
-           ["particle_velocity_%s" % ax for ax in "xyz"]
+           [f"particle_position_{ax}" for ax in "xyz"] + \
+           [f"particle_velocity_{ax}" for ax in "xyz"]
         for field in default_fields:
             if field not in my_fields:
                 my_fields.append(field)
@@ -436,7 +436,7 @@ class TreeFarm(object):
             num_halos = len(halos)
             data = self._create_halo_data_lists(halos, my_fields)
         else:
-            num_halos = ds.index.particle_count[halos]
+            num_halos = _get_total_halos(ds, halos)
             data = dict((field, ds.r[halos, field].in_base())
                         for field in my_fields
                         if field != "descendent_identifier")
@@ -444,8 +444,7 @@ class TreeFarm(object):
         ftypes = dict([(field, ".") for field in data])
         extra_attrs = {"num_halos": num_halos,
                        "data_type": "halo_catalog"}
-        mylog.info("Saving catalog with %d halos to %s." %
-                   (num_halos, filename))
+        mylog.info(f"Saving catalog with {num_halos} halos to {filename}.")
         save_as_dataset(ds, filename, data, field_types=ftypes,
                         extra_attrs=extra_attrs)
 
@@ -474,6 +473,11 @@ class TreeFarm(object):
             if len(shape) > 1 and shape[-1] == 1:
                 data[hp] = np.reshape(data[hp], shape[:-1])
         return data
+
+
+def _get_total_halos(ds, halo_type):
+    return sum([df.total_particles[halo_type]
+                for df in ds.index.data_files])
 
 def _get_tree_basename(fn):
     myfn = getattr(fn, "basename", fn)

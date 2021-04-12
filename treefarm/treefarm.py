@@ -18,10 +18,6 @@ import os
 
 from yt.frontends.ytdata.utilities import \
     save_as_dataset
-from yt.funcs import \
-    ensure_dir, \
-    get_output_filename, \
-    is_sequence
 from yt.units.yt_array import \
     YTArray
 from yt.utilities.parallel_tools.parallel_analysis_interface import \
@@ -37,6 +33,10 @@ from treefarm.ancestry_short import \
 from treefarm.halo_selector import \
     selector_registry, \
     clear_id_cache
+from treefarm.utilities.funcs import \
+    ensure_dir, \
+    get_output_filename, \
+    is_sequence
 from treefarm.utilities.io import \
     yt_load
 from treefarm.utilities.logger import \

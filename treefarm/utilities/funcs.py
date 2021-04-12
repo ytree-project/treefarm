@@ -13,6 +13,7 @@ Utility functions
 # The full license is in the file COPYING.txt, distributed with this software.
 #-----------------------------------------------------------------------------
 
+import errno
 import os
 
 def ensure_dir(path):

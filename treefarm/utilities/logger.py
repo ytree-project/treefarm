@@ -17,6 +17,9 @@ import logging
 import sys
 from tqdm import tqdm
 
+from yt.funcs import is_root
+from yt.utilities.logger import ytLogger as mylog
+
 # CRITICAL 50
 # ERROR    40
 # WARNING  30

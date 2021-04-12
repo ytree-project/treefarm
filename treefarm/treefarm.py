@@ -20,7 +20,6 @@ from yt.frontends.ytdata.utilities import \
     save_as_dataset
 from yt.funcs import \
     ensure_dir, \
-    get_pbar, \
     get_output_filename, \
     is_sequence
 from yt.units.yt_array import \
@@ -41,6 +40,7 @@ from treefarm.halo_selector import \
 from treefarm.utilities.io import \
     yt_load
 from treefarm.utilities.logger import \
+    get_pbar, \
     set_parallel_logger, \
     treefarmLogger as mylog
 

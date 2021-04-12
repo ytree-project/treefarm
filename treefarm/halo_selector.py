@@ -15,14 +15,15 @@ HaloSelector functions
 
 import numpy as np
 
-from yt.funcs import \
-    is_sequence
 from yt.units.yt_array import \
     YTQuantity
 from yt.utilities.operator_registry import \
     OperatorRegistry
 from yt.utilities.exceptions import \
     YTSphereTooSmall
+
+from treefarm.utilities.funcs import \
+    is_sequence
 
 selector_registry = OperatorRegistry()
 

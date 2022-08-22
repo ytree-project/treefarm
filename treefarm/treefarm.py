@@ -190,19 +190,19 @@ class TreeFarm(object):
             self.setup_function(ds)
         return ds
 
-    def _find_ancestors(self, hc, ds2, id_store=None):
+    def _find_ancestors(self, hc, halo_type, ds2, id_store=None):
         """
         Search for ancestors of a given halo.
         """
         if id_store is None: id_store = []
-        halo_member_ids = hc["member_ids"].d.astype(np.int64)
+        halo_member_ids = hc[halo_type, "member_ids"].d.astype(np.int64)
         candidate_ids = self.selector(hc, ds2)
 
         ancestors = []
         for candidate_id in candidate_ids:
             if candidate_id in id_store: continue
             candidate = ds2.halo(hc.ptype, candidate_id)
-            candidate_member_ids = candidate["member_ids"].d.astype(np.int64)
+            candidate_member_ids = candidate[halo_type, "member_ids"].d.astype(np.int64)
             if self.ancestry_checker(halo_member_ids, candidate_member_ids):
                 candidate.descendent_identifier = hc.particle_identifier
                 ancestors.append(candidate)
@@ -218,17 +218,17 @@ class TreeFarm(object):
 
         return ancestors
 
-    def _find_descendent(self, hc, ds2):
+    def _find_descendent(self, hc, halo_type, ds2):
         """
         Search for descendents of a given halo.
         """
-        halo_member_ids = hc["member_ids"].d.astype(np.int64)
+        halo_member_ids = hc[halo_type, "member_ids"].d.astype(np.int64)
         candidate_ids = self.selector(hc, ds2)
 
         hc.descendent_identifier = -1
         for candidate_id in candidate_ids:
             candidate = ds2.halo(hc.ptype, candidate_id)
-            candidate_member_ids = candidate["member_ids"].d.astype(np.int64)
+            candidate_member_ids = candidate[halo_type, "member_ids"].d.astype(np.int64)
             if self.ancestry_checker(candidate_member_ids, halo_member_ids):
                 hc.descendent_identifier = candidate.particle_identifier
                 break
@@ -311,7 +311,7 @@ class TreeFarm(object):
                 my_halo = ds1.halo(halo_type, halo_id)
 
                 target_halos.append(my_halo)
-                my_ancestors = self._find_ancestors(my_halo, ds2,
+                my_ancestors = self._find_ancestors(my_halo, halo_type, ds2,
                                                     id_store=id_store)
                 ancestor_halos.extend(my_ancestors)
                 my_i += njobs
@@ -321,8 +321,8 @@ class TreeFarm(object):
             if i == 0:
                 for halo in target_halos:
                     halo.descendent_identifier = -1
-                self._save_catalog(filename, ds1, target_halos, fields)
-            self._save_catalog(filename, ds2, ancestor_halos, fields)
+                self._save_catalog(filename, ds1, target_halos, halo_type, fields)
+            self._save_catalog(filename, ds2, ancestor_halos, halo_type, fields)
 
             if len(ancestor_halos) == 0:
                 break
@@ -374,7 +374,7 @@ class TreeFarm(object):
 
             target_halos = []
             if _get_total_halos(ds1, halo_type) == 0:
-                self._save_catalog(filename, ds1, target_halos, fields)
+                self._save_catalog(filename, ds1, target_halos, halo_type, fields)
                 ds1 = ds2
                 continue
 
@@ -389,12 +389,12 @@ class TreeFarm(object):
                 my_halo = ds1.halo(halo_type, halo_id)
 
                 target_halos.append(my_halo)
-                self._find_descendent(my_halo, ds2)
+                self._find_descendent(my_halo, halo_type, ds2)
                 my_i += njobs
                 pbar.update(my_i)
             pbar.finish()
 
-            self._save_catalog(filename, ds1, target_halos, fields)
+            self._save_catalog(filename, ds1, target_halos, halo_type, fields)
             ds1 = ds2
             clear_id_cache()
 
@@ -406,7 +406,7 @@ class TreeFarm(object):
         if self.comm.rank == 0:
             self._save_catalog(filename, ds2, halo_type, fields)
 
-    def _save_catalog(self, filename, ds, halos, fields=None):
+    def _save_catalog(self, filename, ds, halos, halo_type, fields=None):
         """
         Save halo catalog with descendent information.
         """
@@ -434,7 +434,7 @@ class TreeFarm(object):
 
         if isinstance(halos, list):
             num_halos = len(halos)
-            data = self._create_halo_data_lists(halos, my_fields)
+            data = self._create_halo_data_lists(halos, halo_type, my_fields)
         else:
             num_halos = _get_total_halos(ds, halos)
             data = dict((field, ds.r[halos, field].in_base())
@@ -448,7 +448,7 @@ class TreeFarm(object):
         save_as_dataset(ds, filename, data, field_types=ftypes,
                         extra_attrs=extra_attrs)
 
-    def _create_halo_data_lists(self, halos, fields):
+    def _create_halo_data_lists(self, halos, halo_type, fields):
         """
         Given a list of halo containers, return a dictionary
         of field values for all halos.
@@ -460,7 +460,7 @@ class TreeFarm(object):
             my_i = 0
             for halo in halos:
                 for hp in fields:
-                    data[hp].append(_get_halo_property(halo, hp))
+                    data[hp].append(_get_halo_property(halo, halo_type, hp))
                 my_i += self.comm.size
                 pbar.update(my_i)
             pbar.finish()
@@ -483,13 +483,14 @@ def _get_tree_basename(fn):
     myfn = getattr(fn, "basename", fn)
     return os.path.basename(myfn).split(".", 1)[0]
 
-def _get_halo_property(halo, halo_property):
+def _get_halo_property(halo, halo_type, halo_property):
     """
     Convenience function for querying fields and
     other properties from halo containers.
     """
     val = getattr(halo, halo_property, None)
-    if val is None: val = halo[halo_property]
+    if val is None:
+        val = halo[halo_type, halo_property]
     return val
 
 def _print_link_info(ds1, ds2):

@@ -30,9 +30,10 @@ from ytree.utilities.testing import \
     TempDirTest
 
 def virial_radius(field, data):
+    ftype = field.name[0]
     rho_c = data.ds.cosmology.critical_density(
         data.ds.current_redshift)
-    return (3 * data["particle_mass"] /
+    return (3 * data[ftype, "particle_mass"] /
             (800 * np.pi * rho_c))**(1./3)
 
 def setup_ds(ds):

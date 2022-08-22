@@ -66,5 +66,5 @@ setup(name="treefarm",
           'dev': dev_requirements,
           'rtd': [pkg for pkg in dev_requirements if 'sphinx' not in pkg],
       },
-      python_requires='>=3.6'
+      python_requires='>=3.7'
 )

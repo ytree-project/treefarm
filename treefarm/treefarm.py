@@ -476,8 +476,12 @@ class TreeFarm(object):
 
 
 def _get_total_halos(ds, halo_type):
-    return sum([df.total_particles[halo_type]
-                for df in ds.index.data_files])
+    try:
+        pcount = [df.total_particles[halo_type]
+                  for df in ds.index.data_files]
+        return sum(pcount)
+    except TypeError:
+        return 0
 
 def _get_tree_basename(fn):
     myfn = getattr(fn, "basename", fn)

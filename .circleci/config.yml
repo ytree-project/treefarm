@@ -216,38 +216,19 @@ workflows:
    normal-tests:
      jobs:
        - tests:
-           name: "Python 3.8 tests"
-           tag: "3.8.13"
-           ytdev: 1
+           name: "Python 3.9 tests"
+           tag: "3.9.20"
+           ytdev: 0
 
        - tests:
-           name: "Python 3.10 tests with yt-dev"
-           tag: "3.10.6"
+           name: "Python 3.12 tests with yt-dev"
+           tag: "3.12.7"
            coverage: 1
            ytdev: 1
 
        - docs-test:
            name: "Test docs build"
-           tag: "3.10.6"
-
-   daily:
-     triggers:
-       - schedule:
-           cron: "0 0 * * *"
-           filters:
-            branches:
-              only:
-                - main
-     jobs:
-       - tests:
-           name: "Python 3.10 tests with yt-dev"
-           tag: "3.10.6"
-           coverage: 0
-           ytdev: 1
-
-       - docs-test:
-           name: "Test docs build"
-           tag: "3.10.6"
+           tag: "3.12.7"
 
    weekly:
      triggers:
@@ -261,4 +242,15 @@ workflows:
        - tests:
            name: "Python 3.9 tests"
            tag: "3.9.12"
+           coverage: 0
+           ytdev: 0
+
+       - tests:
+           name: "Python 3.12 tests with yt-dev"
+           tag: "3.12.7"
+           coverage: 0
            ytdev: 1
+
+       - docs-test:
+           name: "Test docs build"
+           tag: "3.12.7"

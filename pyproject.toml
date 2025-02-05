@@ -1,0 +1,91 @@
+[build-system]
+requires = [
+  "setuptools>=61.2",
+  "setuptools_scm[toml]>=7.0.1",
+]
+
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "treefarm"
+description = "An extension of yt for creating merger-trees."
+authors = [
+    { name = "Britton Smith", email = "brittonsmith@gmail.com" },
+]
+keywords = [
+    "simulation",
+    "merger tree",
+    "astronomy",
+    "astrophysics"
+]
+readme = "README.md"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Unix",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "configparser",
+    "h5py",
+    "numpy",
+    "yt>=4.2",
+]
+dynamic = [
+    "version",
+]
+
+[project.optional-dependencies]
+dev = [
+    "codecov",
+    "flake8",
+    "pydot",
+    "pytest>=3.6",
+    "pytest-cov",
+    "twine",
+    "wheel",
+    "sphinx",
+    "sphinx_rtd_theme",
+]
+rtd = [
+    "codecov",
+    "flake8",
+    "pydot",
+    "pytest>=3.6",
+    "pytest-cov",
+    "twine",
+    "wheel",
+    "sphinx_rtd_theme",
+]
+
+[project.urls]
+Homepage = "https://github.com/ytree-project/treefarm"
+Documentation = "https://treefarm.readthedocs.io/"
+Changelog = "https://treefarm.readthedocs.io/en/latest/changelog.html"
+Repository = "https://github.com/ytree-project/treefarm"
+Issues = "https://github.com/ytree-project/treefarm/issues"
+
+[tool.setuptools]
+include-package-data = true
+zip-safe = false
+license-files = [
+    "LICENSE",
+]
+
+[tool.setuptools.packages.find]
+include = [
+    "treefarm",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "treefarm.__version__"}

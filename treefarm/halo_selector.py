@@ -19,8 +19,6 @@ from yt.units.yt_array import \
     YTQuantity
 from yt.utilities.operator_registry import \
     OperatorRegistry
-from yt.utilities.exceptions import \
-    YTSphereTooSmall
 
 from treefarm.utilities.funcs import \
     is_sequence
@@ -119,13 +117,13 @@ def sphere_selector(hc, ds2, radius_field, factor=1,
     radius = ds2.quan(radius.to("code_length").d[0], "code_length")
     if min_radius is not None: radius = max(radius, min_radius)
 
-    try:
         sp = ds2.sphere(center, radius)
         my_ids = sp[(hc.ptype, "particle_identifier")]
         my_ids = my_ids[np.argsort(sp[(hc.ptype, "particle_radius")])]
-        return my_ids.d.astype(np.int64)
-    except YTSphereTooSmall:
-        return []
+        if len(my_ids):
+            return my_ids.d.astype(np.int64)
+        else:
+            return []
 
 
 add_halo_selector("sphere", sphere_selector)

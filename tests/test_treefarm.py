@@ -24,9 +24,9 @@ from treefarm import \
     TreeFarm
 from treefarm.utilities.testing import \
     test_data_dir
-from ytree.utilities.testing import \
+from ytree.testing.utilities import \
+    compare_arbors, \
     requires_file, \
-    save_and_compare, \
     TempDirTest
 
 def virial_radius(field, data):
@@ -65,7 +65,9 @@ class TreeFarmTest(TempDirTest):
 
         a = ytree.load("my_descendents/fof_subhalo_tab_020.0.h5")
         assert isinstance(a, TreeFarmArbor)
-        save_and_compare(a)
+        fn = a.save_arbor()
+        a2 = ytree.load(fn)
+        compare_arbors(a2, a)
 
     @requires_file(FOF40)
     def test_treefarm_ancestors(self):
@@ -88,4 +90,6 @@ class TreeFarmTest(TempDirTest):
         tfn = os.path.join("my_ancestors/%s.0.h5" % str(ds))
         a = ytree.load(tfn)
         assert isinstance(a, TreeFarmArbor)
-        save_and_compare(a)
+        fn = a.save_arbor()
+        a2 = ytree.load(fn)
+        compare_arbors(a2, a)
